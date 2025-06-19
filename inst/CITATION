@@ -1,0 +1,16 @@
+bibentry(bibtype = "Article",
+  title        = "Temporal Disaggregation of Time Series",
+  author       = c(person(given = "Christoph",
+                          family = "Sax",
+                          email = "christoph.sax@gmail.com"),
+                   person(given = "Peter",
+                          family = "Steiner")),
+  journal      = "The R Journal",
+  year         = "2013",
+  volume       = "5",
+  number       = "2",
+  pages        = "80--87",
+  doi          = "10.32614/RJ-2013-028",
+
+  header       = "To cite tempdisagg in publications use:"
+)

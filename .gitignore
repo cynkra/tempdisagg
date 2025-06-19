@@ -1,0 +1,9 @@
+.Rhistory
+.Rproj.user
+.DS_Store
+.Rapp.history
+.Rbuildignore
+tempdisagg.Rproj
+inst/doc
+.
+docs

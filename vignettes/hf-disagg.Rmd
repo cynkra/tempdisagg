@@ -1,0 +1,113 @@
+---
+title: "Temporal Disaggregation to High-Frequency"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Temporal Disaggregation to High-Frequency (e.g., to daily)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  fig.width  = 7.1,
+  fig.height = 3.5,
+  comment = "#>"
+)
+
+```
+
+
+## Convert between any frequency
+
+Since version 1.0, tempdisagg can convert between most frequencies, e.g., it can disaggregate a monthly series to daily.
+It is no longer restricted to regular conversions, where each low frequency period had the same number of high frequency periods.
+Instead, a low frequency period (e.g. month) can contain any number of high-frequency periods (e.g. 31, 28 or 29 days).
+Thanks to Roger Kissling and Stella Sim who have suggested this idea.
+
+We can not only convert months to days, but also years to days, weeks to seconds, or academic years to seconds, or lunar years to hours, ...
+The downside is that the computation time depends on the number of observations.
+Thus, for longer high-frequency series, the computation may take a while.
+
+## Quarterly to daily disaggregation
+
+In the following, we try to disaggregate quarterly GDP of Switzerland to a hypothetical daily GDP series.
+The example series are shipped with the package.
+
+```{r}
+library(tempdisagg)
+data(tempdisagg)
+head(gdp.q)
+```
+
+Because we are dealing with daily data, we keep the data in a `data.frame`, rather than in a `ts` object. Other time series objects, such as `xts` and `tsibble`, are possible as well.
+For conversion and visualization, we use the [tsbox](https://docs.ropensci.org/tsbox/) package.
+
+```{r}
+library(tsbox)
+ts_plot(gdp.q, title = "Swiss GDP", subtitle = "real, not seasonally adjusted")
+```
+
+## No indicator
+
+For models without an indicator series, `method = "fast"` uses the Chow-Lin method with a *rho* parameter value very close to 1. This is numerically close to the theoretically preferable Denton-Cholette method but much faster.
+Faster, as stated above, has a relative meaning; the following calculation still takes a few seconds:
+
+
+```{r}
+m.d.noind <- td(gdp.q ~ 1, to = "daily", method = "fast")
+summary(m.d.noind)
+```
+
+Because daily GDP is much lower than monthly GDP, we scale both series to the same mean and standard deviation:
+
+```{r}
+gdp.d.noind <- predict(m.d.noind)
+ts_plot(
+  ts_scale(
+    ts_c(gdp.d.noind, gdp.q)
+  ),
+  title = "Daily disaggregated GDP",
+  subtitle = "no indicator"
+)
+```
+
+Like with all disaggregation methods in tempdisagg, the resulting series fulfills the aggregation constraint:
+
+```{r}
+all.equal(ts_frequency(gdp.d.noind, "quarter", aggregate = "sum"), gdp.q)
+```
+
+
+## Stock market data as an indicator
+
+For a more refined disaggregation, one or several indicator series may be used.
+In the following, we use Swiss stock market data to disaggregate GDP.
+Data of the stock market index, the SMI, is also included in tempdisagg:
+
+```{r}
+ts_plot(spi.d, title = "Swiss Performance Index", subtitle = "daily values, interpolated")
+```
+
+Weekend and holiday values have been interpolated, because `td` does not allow the presence of missing values. For how to interpolate the raw data, see `?spi.d`.
+
+The following uses the Chow-Lin method to disaggregate the series. A high *rho* parameter takes into account that the two series are unlikely to be co-integrated.
+
+```{r}
+m.d.stocks <- td(gdp.q ~ spi.d, method = "chow-lin-fixed", fixed.rho = 0.9)
+summary(m.d.stocks)
+```
+
+This results in a much more volatile estimation of daily GDP:
+
+```{r}
+gdp.d.stocks <- predict(m.d.stocks)
+ts_plot(
+  ts_scale(
+    ts_c(gdp.d.stocks, gdp.q)
+  ),
+  title = "Daily disaggregated GDP",
+  subtitle = "one indicator"
+)
+```
+
