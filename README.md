@@ -31,8 +31,8 @@ install.packages("tempdisagg")
 To install the development version:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("cynkra/tempdisagg")
+# install.packages("pak")
+pak::pak("cynkra/tempdisagg")
 ```
 
 Our article on [temporal disaggregation of time
