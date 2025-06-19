@@ -16,8 +16,8 @@ knitr::opts_chunk$set(
 # tempdisagg: Methods for Temporal Disaggregation and Interpolation of Time Series
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/christophsax/tempdisagg/branch/main/graph/badge.svg)](https://app.codecov.io/gh/christophsax/tempdisagg?branch=main)
-[![R-CMD-check](https://github.com/christophsax/tempdisagg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christophsax/tempdisagg/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/cynkra/tempdisagg/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cynkra/tempdisagg?branch=main)
+[![R-CMD-check](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Temporal disaggregation methods are used to disaggregate or interpolate a low
@@ -39,7 +39,7 @@ install.packages("tempdisagg")
 To install the development version:
 ```r
 # install.packages("remotes")
-remotes::install_github("christophsax/tempdisagg")
+remotes::install_github("cynkra/tempdisagg")
 ```
 
 Our article on [temporal disaggregation of time series][article] in the R-Journal describes
@@ -50,5 +50,5 @@ Please report bugs on [Github][github] or send an
 
 [package]: https://cran.r-project.org/package=tempdisagg
 [article]: https://journal.r-project.org/archive/2013-2/sax-steiner.pdf
-[github]: https://github.com/christophsax/tempdisagg
+[github]: https://github.com/cynkra/tempdisagg
 
