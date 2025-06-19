@@ -39,7 +39,3 @@ test_that("internal NA drops an error", {
   y.df <- ts_df(y.ts)
   expect_error(td(y.df ~ 1, to = "monthly"))
 })
-
-test_that("FIXME", {
-  expect_null(1)
-})
