@@ -6,3 +6,6 @@ noinst
 ^\.github$
 ^README\.Rmd$
 ^codecov\.yml$
+^_pkgdown\.yml$
+^\.$
+^pkgdown$
