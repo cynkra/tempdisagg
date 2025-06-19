@@ -270,7 +270,7 @@ td <- function(formula, conversion = "sum", to = "quarterly",
   }
 
   if (method == "denton") {
-    message(
+    cli::cli_alert_info(
       "'denton-cholette' removes the transient movement at the beginning of ",
       "the series and is preferable to the original 'denton' method in most ",
       "cases."
@@ -371,7 +371,7 @@ td <- function(formula, conversion = "sum", to = "quarterly",
         lf.dt <- tsbox::ts_span(lf.dt, start = hf[1])
         y_l.series <- tsbox::ts_span(y_l.series, start = hf[1])
         lf <- lf[lf >= hf[1]]
-        message("High frequency series shorter than low frequency. Discarding low frequency before ", lf[1], ".")
+        cli::cli_alert_info("High frequency series shorter than low frequency. Discarding low frequency before ", lf[1], ".")
       }
 
       # last time stamp covered by lf, in hf units. This could be infered from hf
@@ -436,12 +436,12 @@ td <- function(formula, conversion = "sum", to = "quarterly",
       X.end_l <- SubConvertEnd(hf.end = X.end, f = f, f_l = f_l)
       if (X.start_l > start + 0.001) {
         start <- X.start_l
-        message("High frequency series shorter than low frequency. Discarding low frequency before ", start, ".")
+        cli::cli_alert_info("High frequency series shorter than low frequency. Discarding low frequency before ", start, ".")
         y_l.series <- window(y_l.series, start = start)
       }
       if (X.end_l < end - 0.001) {
         end <- X.end_l
-        message("High frequency series shorter than low frequency. Discarding low frequency after ", end, ".")
+        cli::cli_alert_info("High frequency series shorter than low frequency. Discarding low frequency after ", end, ".")
         y_l.series <- window(y_l.series, end = end)
       }
 
