@@ -6,20 +6,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Methods for Temporal Disaggregation and Interpolation of Time Series • tempdisagg</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Methods for Temporal Disaggregation and Interpolation of Time Series">
 <meta name="description" content="Temporal disaggregation methods are used to disaggregate and interpolate a low frequency time series to a higher frequency series, where either the sum, the mean, the first or the last value of the resulting high frequency series is consistent with the low frequency series. Temporal disaggregation can be performed with or without one or more high frequency indicator series. Contains the methods of Chow-Lin, Santos-Silva-Cardoso, Fernandez, Litterman, Denton and Denton-Cholette, summarized in Sax and Steiner (2013) &lt;doi:10.32614/RJ-2013-028&gt;. Supports most R time series classes.">
 <meta property="og:description" content="Temporal disaggregation methods are used to disaggregate and interpolate a low frequency time series to a higher frequency series, where either the sum, the mean, the first or the last value of the resulting high frequency series is consistent with the low frequency series. Temporal disaggregation can be performed with or without one or more high frequency indicator series. Contains the methods of Chow-Lin, Santos-Silva-Cardoso, Fernandez, Litterman, Denton and Denton-Cholette, summarized in Sax and Steiner (2013) &lt;doi:10.32614/RJ-2013-028&gt;. Supports most R time series classes.">
+<script defer data-domain="tempdisagg.cynkra.com" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
-
+    <a href="https://cynkra.com" class="external-link logo-cynkra"><img src="https://cynkra.com/assets/img/logo-cynkra-square.svg" alt="cynkra" width="100" height="100"><div class="sr-only">cynkra</div></a>
     <a class="navbar-brand me-2" href="index.html">tempdisagg</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
@@ -30,7 +37,9 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto">
+        <!-- empty ul needed otherwise everything on the left -->
+        <ul class="navbar-nav me-auto"></ul>
+<ul class="navbar-nav">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
@@ -40,13 +49,11 @@
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
-      </ul>
-<ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
+            <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/cynkra/tempdisagg/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
-      </ul>
+        </ul>
 </div>
 
 
@@ -67,8 +74,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tempdisagg"</span><span class="op">)</span></span></code></pre></div>
 <p>To install the development version:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"cynkra/tempdisagg"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"cynkra/tempdisagg"</span><span class="op">)</span></span></code></pre></div>
 <p>Our article on <a href="https://journal.r-project.org/archive/2013-2/sax-steiner.pdf" class="external-link">temporal disaggregation of time series</a> in the R-Journal describes the package and the theory of temporal disaggregation in more detail.</p>
 <p>Please report bugs on <a href="https://github.com/cynkra/tempdisagg" class="external-link">Github</a> or send an <a href="mailto:christoph.sax@gmail.com">e-mail</a>, thank you!</p>
 </div>
@@ -100,7 +107,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Christoph Sax <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7192-7044" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
+<a href="https://cynkra.com/about/#christoph" class="external-link">Christoph Sax</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7192-7044" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Peter Steiner <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
@@ -119,11 +127,13 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Christoph Sax, Peter Steiner.</p>
+  <p>Developed by <a href="https://cynkra.com/about/#christoph" class="external-link">Christoph Sax</a>, Peter Steiner.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>
+Sponsored by <a href="https://cynkra.com" class="external-link">cynkra</a> <span class="cynkra-square"></span>
+</p>
 </div>
 
     </footer>
