@@ -6,7 +6,7 @@ Authors@R: c(
     person("Christoph", "Sax", email = "christoph.sax@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-7192-7044")),
     person("Peter", "Steiner", role = c("aut")),
     person("Tommaso", "Di Fonzo", role = "ctb"))
-URL: https://journal.r-project.org/archive/2013-2/sax-steiner.pdf
+URL: https://journal.r-project.org/archive/2013-2/sax-steiner.pdf, http://cynkra.github.io/tempdisagg/
 BugReports: https://github.com/christophsax/tempdisagg
 Suggests:
     tsbox,

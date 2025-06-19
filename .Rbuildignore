@@ -9,3 +9,4 @@ noinst
 ^_pkgdown\.yml$
 ^\.$
 ^pkgdown$
+^docs$
