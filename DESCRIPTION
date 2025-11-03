@@ -8,8 +8,6 @@ Authors@R: c(
     person("Tommaso", "Di Fonzo", role = "ctb"))
 URL: https://journal.r-project.org/archive/2013-2/sax-steiner.pdf, http://cynkra.github.io/tempdisagg/
 BugReports: https://github.com/cynkra/tempdisagg
-Imports:
-    cli
 Suggests:
     tsbox,
     testthat,
