@@ -18,7 +18,8 @@ test_that("numeric mode works as expected", {
 
 test_that("numeric mode works with different methods", {
   y <- c(100, 150, 200, 250, 300)
-  x <- rep(c(20, 25, 30, 35), 5)
+  # Create varying data to avoid singular matrix
+  x <- seq(20, 100, length.out = 20)
 
   # Test different methods work in numeric mode
   m_chow <- td(y ~ x, to = 4, method = "chow-lin-maxlog")
