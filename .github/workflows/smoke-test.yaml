@@ -36,6 +36,7 @@ jobs:
       - name: Run smoke tests
         shell: Rscript {0}
         run: |
-          # Run only the fast unit tests, skip extensive test-all.R
+          # Run all tests on single platform for quick validation
           library(testthat)
-          test_dir("tests/testthat", filter = "(td|numeric|output|misc)", reporter = "progress")
+          library(tempdisagg)
+          test_check("tempdisagg")
