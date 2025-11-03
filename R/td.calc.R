@@ -206,7 +206,7 @@ CalcGLS <- function(y, X, vcov, logl = TRUE, stats = TRUE) {
     z$s_2 <- z$rss / m
     u_l <- y - X %*% z$coefficients
     z$logl <- as.numeric(-m / 2 - m * log(2 * pi) / 2 - m * log(z$s_2) /
-      2 - log(det(vcov)) / 2)
+      2 - determinant(vcov, logarithm = TRUE)$modulus / 2)
   }
 
   if (stats) {
