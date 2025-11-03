@@ -36,4 +36,5 @@ jobs:
         shell: Rscript {0}
         run: |
           # Run full package check on single platform for quick validation
-          devtools::check(error_on = "warning")
+          # Use --as-cran to match R-CMD-check strictness
+          devtools::check(args = c("--no-manual", "--as-cran"), error_on = "warning")
