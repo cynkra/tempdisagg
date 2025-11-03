@@ -231,3 +231,53 @@ test_that("conversion types work with swisspharma data", {
   expect_equal(frequency(a_first), 1)
   expect_equal(frequency(a_last), 1)
 })
+
+test_that("conversion types handle mixed positive/negative values", {
+  skip_on_cran()
+
+  # Create series with mixed values
+  x <- ts(c(-10, 5, 15, -20, 30, -5, 10, 25), frequency = 4, start = c(2000, 1))
+
+  # Test all conversion types
+  sum_result <- ta(x, to = "annual", conversion = "sum")
+  avg_result <- ta(x, to = "annual", conversion = "average")
+  first_result <- ta(x, to = "annual", conversion = "first")
+  last_result <- ta(x, to = "annual", conversion = "last")
+
+  # All should complete successfully
+  expect_s3_class(sum_result, "ts")
+  expect_s3_class(avg_result, "ts")
+  expect_s3_class(first_result, "ts")
+  expect_s3_class(last_result, "ts")
+
+  # First should equal first value in year
+  expect_equal(as.numeric(first_result)[1], -10)
+
+  # Last should equal last value in year
+  expect_equal(as.numeric(last_result)[2], 25)
+})
+
+test_that("conversion types maintain mathematical relationships", {
+  skip_on_cran()
+
+  # Create test data
+  x <- ts(rep(c(10, 20, 30, 40), 3), frequency = 4, start = c(2000, 1))
+
+  sum_result <- ta(x, to = "annual", conversion = "sum")
+  avg_result <- ta(x, to = "annual", conversion = "average")
+  first_result <- ta(x, to = "annual", conversion = "first")
+  last_result <- ta(x, to = "annual", conversion = "last")
+
+  # Sum should equal average * frequency for complete years
+  expect_equal(
+    as.numeric(sum_result),
+    as.numeric(avg_result) * 4,
+    tolerance = 1e-10
+  )
+
+  # First should be first value
+  expect_equal(as.numeric(first_result), rep(10, length(first_result)))
+
+  # Last should be last value
+  expect_equal(as.numeric(last_result), rep(40, length(last_result)))
+})
