@@ -29,14 +29,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::testthat, local::.
-          needs: test
-          cache-version: 2
+          extra-packages: any::devtools
+          needs: check
 
       - name: Run smoke tests
         shell: Rscript {0}
         run: |
-          # Run all tests on single platform for quick validation
-          library(testthat)
-          library(tempdisagg)
-          test_dir("tests/testthat", reporter = "progress")
+          # Run full package check on single platform for quick validation
+          devtools::check(error_on = "warning")
