@@ -96,7 +96,7 @@ SubAggregation <- function(x, conversion = "sum", f_l = 1) {
   hf.start <- time(x)[!is.na(x)][1]
   hf.start.na <- time(x)[1]
   hf.end <- tail(time(x)[!is.na(x)], 1)
-  hf.end.na <- tail(time(x), 1)
+  hf.end.na <- c(tail(time(x), 1))
 
   lf.start <- SubConvertStart(hf.start = hf.start, f = f, f_l = f_l)
   lf.start.na <- SubConvertStart(hf.start = hf.start.na, f = f, f_l = f_l)
