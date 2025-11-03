@@ -1,6 +1,6 @@
 Package: tempdisagg
-Version: 1.1.1
-Date: 2023-08-08
+Version: 1.2.0
+Date: 2025-11-03
 Title: Methods for Temporal Disaggregation and Interpolation of Time Series
 Authors@R: c(
     person("Christoph", "Sax", email = "christoph.sax@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-7192-7044")),
@@ -8,8 +8,8 @@ Authors@R: c(
     person("Tommaso", "Di Fonzo", role = "ctb"),
     person("Nelson", "Stevens", role = "ctb"),
     person("Tobias", "Schieferdecker", role = "ctb"))
-URL: https://journal.r-project.org/archive/2013-2/sax-steiner.pdf, http://cynkra.github.io/tempdisagg/
-BugReports: https://github.com/cynkra/tempdisagg
+URL: https://cynkra.github.io/tempdisagg/, https://journal.r-project.org/articles/RJ-2013-028/
+BugReports: https://github.com/cynkra/tempdisagg/issues
 Suggests:
     tsbox,
     testthat,

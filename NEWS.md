@@ -1,3 +1,13 @@
+# tempdisagg 1.2.0
+
+## minor changes
+
+- Improve test coverage and reorganize tests
+- Modernize GitHub Actions workflow
+- Use `determinant(vcov, logarithm = TRUE)$modulus` for numerical stability
+- Suggest xts package for enhanced time series support
+
+
 # tempdisagg 1.1.1
 
 ## minor changes
@@ -137,4 +147,3 @@
   QR-decomposition instead of matrix-inversion. This is faster and
   numerically stable. It resolves an issue wher large (or small) numbers have
   led to a 'system is computationally singular' error.
-
