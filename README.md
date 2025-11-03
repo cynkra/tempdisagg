@@ -14,8 +14,8 @@ a low frequency time series to a higher frequency series, where either
 the sum, the average, the first or the last value of the resulting high
 frequency series is consistent with the low frequency series. Temporal
 disaggregation can be performed with or without one or more high
-frequency indicator series. Contains the methods of Chow-Lin,
-Santos-Silva-Cardoso, Fernandez, Litterman, Denton and Denton-Cholette.
+frequency indicator series. Contains the methods of **Chow-Lin**,
+**Santos-Silva-Cardoso**, **Fernandez**, **Litterman**, **Denton** and **Denton-Cholette**.
 Supports most R time series classes.
 
 ## Installation
@@ -39,5 +39,4 @@ series](https://journal.r-project.org/archive/2013-2/sax-steiner.pdf) in
 the R-Journal describes the package and the theory of temporal
 disaggregation in more detail.
 
-Please report bugs on [Github](https://github.com/cynkra/tempdisagg) or
-send an [e-mail](mailto:christoph.sax@gmail.com), thank you!
+Please report bugs on [Github](https://github.com/cynkra/tempdisagg). Thank you!
