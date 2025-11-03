@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # tempdisagg: Methods for Temporal Disaggregation and Interpolation of Time Series
 
 <!-- badges: start -->
