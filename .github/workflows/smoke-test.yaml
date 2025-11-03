@@ -38,4 +38,4 @@ jobs:
         run: |
           # Run only the fast unit tests, skip extensive test-all.R
           library(testthat)
-          test_check("tempdisagg", filter = "^(td|numeric|output|misc)$")
+          test_dir("tests/testthat", filter = "(td|numeric|output|misc)", reporter = "progress")
