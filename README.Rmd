@@ -16,8 +16,10 @@ knitr::opts_chunk$set(
 # tempdisagg: Methods for Temporal Disaggregation and Interpolation of Time Series
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/cynkra/tempdisagg/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cynkra/tempdisagg?branch=main)
+[![smoke-test](https://github.com/cynkra/tempdisagg/actions/workflows/smoke-test.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/smoke-test.yaml)
 [![R-CMD-check](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/cynkra/tempdisagg/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cynkra/tempdisagg?branch=main)
+[![pkgdown](https://github.com/cynkra/tempdisagg/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 Temporal disaggregation methods are used to disaggregate or interpolate a low
