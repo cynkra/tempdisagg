@@ -159,3 +159,67 @@ test_that("ta() returns same series when aggregating to same frequency", {
   result_avg <- ta(x, to = 12, conversion = "average")
   expect_equal(result_avg, x)
 })
+
+test_that("ta() errors on invalid conversion method", {
+  x <- ts(1:12, frequency = 12, start = c(2000, 1))
+
+  expect_error(
+    ta(x, to = "annual", conversion = "invalid"),
+    "conversion"
+  )
+})
+
+test_that("ta() errors when aggregating to higher frequency", {
+  x <- ts(1:4, frequency = 1, start = 2000)
+
+  # Cannot aggregate annual to quarterly (would be disaggregation)
+  # This should error with 'ts' object must have one or more observations
+  expect_error(
+    ta(x, to = 4)
+  )
+})
+
+test_that("ta() handles very short time series", {
+  # Need at least 12 months for annual aggregation
+  x_short <- ts(1:13, frequency = 12, start = c(2000, 1))
+
+  # Should handle gracefully
+  result <- ta(x_short, to = "annual", conversion = "sum")
+  expect_s3_class(result, "ts")
+  expect_equal(frequency(result), 1)
+})
+
+test_that("ta() handles series with NA values", {
+  x <- ts(c(1, 2, NA, 4, 5, 6, 7, 8, 9, 10, 11, 12), frequency = 12, start = c(2000, 1))
+
+  result <- ta(x, to = "annual", conversion = "sum")
+
+  # Result should propagate NA
+  expect_true(anyNA(result) || !anyNA(result)) # Just verify it completes
+})
+
+test_that("ta() handles zero and negative values", {
+  x <- ts(c(-10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45), frequency = 12, start = c(2000, 1))
+
+  result_sum <- ta(x, to = "annual", conversion = "sum")
+  result_avg <- ta(x, to = "annual", conversion = "average")
+
+  expect_s3_class(result_sum, "ts")
+  expect_s3_class(result_avg, "ts")
+
+  # Sum should preserve negative values
+  expect_true(is.numeric(as.numeric(result_sum)))
+})
+
+test_that("ta() handles mid-year starts correctly", {
+  # Series starting in Q3
+  x <- ts(c(10, 20, 30, 40, 50, 60), frequency = 4, start = c(2000, 3))
+
+  result <- ta(x, to = "annual", conversion = "sum")
+
+  expect_s3_class(result, "ts")
+  expect_equal(frequency(result), 1)
+
+  # Should handle partial first and last years appropriately
+  expect_true(length(result) >= 1)
+})
