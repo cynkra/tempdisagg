@@ -5,9 +5,11 @@
 
 <!-- badges: start -->
 
+[![smoke-test](https://github.com/cynkra/tempdisagg/actions/workflows/smoke-test.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/smoke-test.yaml)
+[![R-CMD-check](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/cynkra/tempdisagg/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cynkra/tempdisagg?branch=main)
-[![R-CMD-check](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/cynkra/tempdisagg/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/cynkra/tempdisagg/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 Temporal disaggregation methods are used to disaggregate or interpolate

@@ -1,16 +1,21 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
-  push:
-    branches: [main, master]
-  pull_request:
+  workflow_run:
+    workflows: ["smoke-test"]
+    types:
+      - completed
     branches: [main, master]
 
 name: R-CMD-check
 
+permissions: read-all
+
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
+    # Only run if smoke-test succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
@@ -18,18 +23,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: macos-latest,   r: 'release', vignettes: false}
+          - {os: windows-latest, r: 'release', vignettes: false}
+          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release', vignettes: false}
+          - {os: ubuntu-latest,   r: 'release', vignettes: true}
+          - {os: ubuntu-latest,   r: 'oldrel-1', vignettes: false}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -43,22 +48,35 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          cache-version: 2
 
       - name: Install tex for vignette building
+        if: matrix.config.vignettes == true
         uses: r-lib/actions/setup-tinytex@v2
 
-      - run: tlmgr --version
+      - name: Check TinyTeX version
+        if: matrix.config.vignettes == true
+        run: tlmgr --version
 
       - name: Install tex packages
+        if: matrix.config.vignettes == true
         run: |
           tinytex::tlmgr_install("ae")
           tinytex::tlmgr_install("grfext")
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
+        if: matrix.config.vignettes == true
         with:
           args: 'c("--no-manual", "--as-cran")'
           build_args: '"--compact-vignettes=gs+qpdf"'
+          check-dir: '"check"'
+          upload-snapshots: true
+
+      - uses: r-lib/actions/check-r-package@v2
+        if: matrix.config.vignettes == false
+        with:
+          args: 'c("--no-manual", "--as-cran", "--no-build-vignettes")'
           check-dir: '"check"'
           upload-snapshots: true
 
