@@ -39,4 +39,4 @@ jobs:
           # Run all tests on single platform for quick validation
           library(testthat)
           library(tempdisagg)
-          test_check("tempdisagg")
+          test_dir("tests/testthat", reporter = "progress")
