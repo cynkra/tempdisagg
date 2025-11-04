@@ -10,4 +10,4 @@ noinst
 ^\.$
 ^pkgdown$
 ^docs$
-.claude
+^\.claude$
