@@ -11,3 +11,4 @@ noinst
 ^pkgdown$
 ^docs$
 ^\.claude$
+^CRAN-SUBMISSION$
