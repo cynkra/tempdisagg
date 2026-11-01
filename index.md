@@ -1,0 +1,35 @@
+# tempdisagg: Methods for Temporal Disaggregation and Interpolation of Time Series
+
+Temporal disaggregation methods are used to disaggregate or interpolate
+a low frequency time series to a higher frequency series, where either
+the sum, the average, the first or the last value of the resulting high
+frequency series is consistent with the low frequency series. Temporal
+disaggregation can be performed with or without one or more high
+frequency indicator series. Contains the methods of **Chow-Lin**,
+**Santos-Silva-Cardoso**, **Fernandez**, **Litterman**, **Denton** and
+**Denton-Cholette**. Supports most R time series classes.
+
+## Installation
+
+To install or update from from
+[CRAN](https://cran.r-project.org/package=tempdisagg), run:
+
+``` r
+
+install.packages("tempdisagg")
+```
+
+To install the development version:
+
+``` r
+
+# install.packages("pak")
+pak::pak("cynkra/tempdisagg")
+```
+
+Our article on [temporal disaggregation of time
+series](https://doi.org/10.32614/RJ-2013-028) in the R-Journal describes
+the package and the theory of temporal disaggregation in more detail.
+
+Please report bugs on [Github](https://github.com/cynkra/tempdisagg).
+Thank you!
